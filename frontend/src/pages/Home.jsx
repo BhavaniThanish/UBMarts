@@ -17,10 +17,26 @@ const Home = () => {
   return (
     <main>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#f5f0e6] via-[#faf7f2] to-[#e8f0d8]">
-        <div className="absolute -top-10 -left-10 w-96 h-96 rounded-full bg-[#a3c86d]/20 blur-3xl" />
-        <div className="absolute -bottom-20 -right-10 w-[500px] h-[500px] rounded-full bg-[#e6a817]/15 blur-3xl" />
+      <section className="relative overflow-hidden hero-premium-bg">
+        <div className="hero-botanical-pattern" />
+        <div className="hero-dot-pattern" />
+        <div className="hero-orb bg-[#a3c86d]/40" style={{ width: 420, height: 420, top: -80, left: -80 }} />
+        <div className="hero-orb bg-[#e6a817]/25" style={{ width: 520, height: 520, bottom: -120, right: -80, animationDelay: '3s' }} />
+        <div className="hero-orb bg-[#2e7d32]/20" style={{ width: 360, height: 360, top: '30%', right: '40%', animationDelay: '6s' }} />
         <div className="grain-overlay" />
+
+        {/* Decorative floating leaves (SVG) */}
+        <svg className="hero-leaf" style={{ top: '8%', right: '4%', width: 90, animationDelay: '0.5s' }} viewBox="0 0 100 100" fill="none">
+          <path d="M50 8 C 20 30, 15 65, 45 92 C 60 78, 88 55, 88 30 C 88 15, 70 8, 50 8Z" fill="#4a7c2a" opacity="0.35" />
+          <path d="M50 15 L 55 88" stroke="#2e7d32" strokeWidth="1.2" opacity="0.5" />
+        </svg>
+        <svg className="hero-leaf" style={{ bottom: '12%', left: '3%', width: 70, animationDelay: '1.8s' }} viewBox="0 0 100 100" fill="none">
+          <path d="M50 8 C 20 30, 15 65, 45 92 C 60 78, 88 55, 88 30 C 88 15, 70 8, 50 8Z" fill="#a3c86d" opacity="0.4" transform="rotate(45 50 50)" />
+        </svg>
+        <svg className="hero-leaf" style={{ top: '45%', left: '2%', width: 55, animationDelay: '3s' }} viewBox="0 0 100 100" fill="none">
+          <path d="M50 8 C 20 30, 15 65, 45 92 C 60 78, 88 55, 88 30 C 88 15, 70 8, 50 8Z" fill="#e6a817" opacity="0.3" transform="rotate(-30 50 50)" />
+        </svg>
+
         <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative z-10">
             {HERO_SLIDES.map((s, i) => i === slide && (
