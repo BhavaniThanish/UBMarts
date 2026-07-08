@@ -18,24 +18,41 @@ const Home = () => {
     <main>
       {/* HERO */}
       <section className="relative overflow-hidden hero-premium-bg">
-        <div className="hero-botanical-pattern" />
-        <div className="hero-dot-pattern" />
-        <div className="hero-orb bg-[#a3c86d]/40" style={{ width: 420, height: 420, top: -80, left: -80 }} />
-        <div className="hero-orb bg-[#e6a817]/25" style={{ width: 520, height: 520, bottom: -120, right: -80, animationDelay: '3s' }} />
-        <div className="hero-orb bg-[#2e7d32]/20" style={{ width: 360, height: 360, top: '30%', right: '40%', animationDelay: '6s' }} />
-        <div className="grain-overlay" />
+        {/* Layered organic background elements */}
+        <div className="hero-leaves-image" />
+        <div className="hero-leaves-image-right" />
+        <div className="hero-sunray" />
+        <div className="hero-organic-lines" />
+        <div className="hero-paper-tex" />
 
-        {/* Decorative floating leaves (SVG) */}
-        <svg className="hero-leaf" style={{ top: '8%', right: '4%', width: 90, animationDelay: '0.5s' }} viewBox="0 0 100 100" fill="none">
-          <path d="M50 8 C 20 30, 15 65, 45 92 C 60 78, 88 55, 88 30 C 88 15, 70 8, 50 8Z" fill="#4a7c2a" opacity="0.35" />
-          <path d="M50 15 L 55 88" stroke="#2e7d32" strokeWidth="1.2" opacity="0.5" />
+        {/* Decorative botanical branch top-right */}
+        <svg className="hero-branch" style={{ top: '-20px', right: '8%', width: 180 }} viewBox="0 0 200 240" fill="none">
+          <path d="M100 240 Q 95 180 105 140 Q 115 100 100 60 Q 85 30 95 5" stroke="#2e5a2b" strokeWidth="2" strokeLinecap="round" opacity="0.55" fill="none" />
+          <g fill="#4a7c2a" opacity="0.55">
+            <ellipse cx="80" cy="200" rx="22" ry="8" transform="rotate(-30 80 200)" />
+            <ellipse cx="125" cy="175" rx="20" ry="7" transform="rotate(25 125 175)" />
+            <ellipse cx="82" cy="145" rx="24" ry="8" transform="rotate(-25 82 145)" />
+            <ellipse cx="122" cy="115" rx="20" ry="7" transform="rotate(30 122 115)" />
+            <ellipse cx="82" cy="85" rx="22" ry="7" transform="rotate(-30 82 85)" />
+            <ellipse cx="118" cy="55" rx="18" ry="6" transform="rotate(25 118 55)" />
+            <ellipse cx="88" cy="28" rx="16" ry="5" transform="rotate(-25 88 28)" />
+          </g>
         </svg>
-        <svg className="hero-leaf" style={{ bottom: '12%', left: '3%', width: 70, animationDelay: '1.8s' }} viewBox="0 0 100 100" fill="none">
-          <path d="M50 8 C 20 30, 15 65, 45 92 C 60 78, 88 55, 88 30 C 88 15, 70 8, 50 8Z" fill="#a3c86d" opacity="0.4" transform="rotate(45 50 50)" />
+
+        {/* Decorative fern bottom-left */}
+        <svg className="hero-branch" style={{ bottom: '-30px', left: '3%', width: 200, animationDelay: '2s' }} viewBox="0 0 200 240" fill="none">
+          <path d="M100 240 Q 105 180 95 140 Q 85 90 105 40 Q 115 15 105 0" stroke="#2e5a2b" strokeWidth="2" strokeLinecap="round" opacity="0.4" fill="none" />
+          <g fill="#6b8e23" opacity="0.45">
+            <ellipse cx="122" cy="200" rx="22" ry="7" transform="rotate(30 122 200)" />
+            <ellipse cx="80" cy="170" rx="20" ry="7" transform="rotate(-30 80 170)" />
+            <ellipse cx="118" cy="140" rx="22" ry="7" transform="rotate(25 118 140)" />
+            <ellipse cx="80" cy="105" rx="24" ry="8" transform="rotate(-30 80 105)" />
+            <ellipse cx="120" cy="70" rx="20" ry="7" transform="rotate(30 120 70)" />
+            <ellipse cx="88" cy="35" rx="18" ry="6" transform="rotate(-25 88 35)" />
+          </g>
         </svg>
-        <svg className="hero-leaf" style={{ top: '45%', left: '2%', width: 55, animationDelay: '3s' }} viewBox="0 0 100 100" fill="none">
-          <path d="M50 8 C 20 30, 15 65, 45 92 C 60 78, 88 55, 88 30 C 88 15, 70 8, 50 8Z" fill="#e6a817" opacity="0.3" transform="rotate(-30 50 50)" />
-        </svg>
+
+        <div className="grain-overlay" />
 
         <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative z-10">
