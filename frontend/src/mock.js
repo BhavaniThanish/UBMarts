@@ -1,6 +1,6 @@
 // Mock data for UB Mart premium redesign
 
-export const LOGO_URL = "https://ubmarts.com/wp-content/uploads/2023/03/ub-mart-logo.png";
+export const LOGO_URL = "/logo.png";
 
 export const CATEGORIES = [
   {
