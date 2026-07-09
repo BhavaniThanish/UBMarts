@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CartDrawer from "./components/CartDrawer";
 import { Toaster } from "./components/ui/toaster";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Products from "./pages/Products";
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
       <CartProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <AnnouncementBar />
           <Header />
           <CartDrawer />
