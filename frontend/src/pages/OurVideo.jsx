@@ -13,14 +13,12 @@ const OurVideo = () => {
       </section>
 
       <section className="max-w-[1400px] mx-auto px-5 lg:px-10 py-20">
-        <div className="w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl aspect-video bg-black">
-          <iframe 
-            src="https://www.youtube.com/embed/UG3sfZKtIrE" 
-            title="UB Mart Video" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen 
-            className="w-full h-full border-0" 
-          />
+        <div className="w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl bg-black">
+          <video className="w-full h-auto max-h-[80vh] object-cover" controls preload="metadata">
+            <source src="/assets/video/promo.mp4" type="video/mp4" />
+            <source src="https://ubmarts.com/wp-content/uploads/2023/07/WhatsApp-Video-2023-07-10-at-4.36.59-PM.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
     </main>
