@@ -26,9 +26,9 @@ const Header = () => {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_4px_30px_-10px_rgba(46,125,50,0.2)]" : "bg-white/80 backdrop-blur-sm"}`}>
       <div className="max-w-[1400px] mx-auto px-5 lg:px-10">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex lg:grid lg:grid-cols-[1fr_auto_1fr] items-center justify-between h-20">
           {/* Left nav */}
-          <nav className="hidden lg:flex items-center gap-8 flex-1">
+          <nav className="hidden lg:flex items-center justify-end gap-8 pr-12">
             <NavLink to="/" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>Home</NavLink>
             <NavLink to="/about" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>About Us</NavLink>
             <NavLink to="/franchise" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>Our Franchise</NavLink>
@@ -40,7 +40,7 @@ const Header = () => {
           </Link>
 
           {/* Right nav */}
-          <nav className="hidden lg:flex items-center gap-8 flex-1 justify-end">
+          <nav className="hidden lg:flex items-center justify-start gap-8 pl-12">
             <div className="dropdown-parent relative">
               <button className="nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] flex items-center gap-1">
                 Our Products <ChevronDown size={14} />
