@@ -14,7 +14,7 @@ const Contact = () => {
   return (
     <main>
       <section className="relative bg-gradient-to-br from-[#f5f0e6] via-[#faf7f2] to-[#e8f0d8] overflow-hidden">
-        <div className="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-[#a3c86d]/20 blur-3xl" />
+        <div className="absolute -top-20 -left-20 w-96 h-96 rounded-circle bg-[#a3c86d]/20 blur-3xl" />
         <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 md:py-24 text-center">
           <div className="text-xs uppercase tracking-[0.3em] text-[#4a7c2a] mb-4">Home / Contact Us</div>
           <h1 className="font-serif text-5xl md:text-7xl text-[#1f2a1a]">Get in <span className="italic text-[#4a7c2a]">Touch</span></h1>
@@ -30,8 +30,8 @@ const Contact = () => {
             { Icon: MapPin, title: "Office", lines: ["Corporate Office", "New Delhi, India"] },
             { Icon: Clock, title: "Business Hours", lines: ["Mon–Sat: 9:30 AM – 6:30 PM", "Sunday – Closed"] },
           ].map(({ Icon, title, lines }, i) => (
-            <div key={i} className="bg-white rounded-2xl border border-[#eae5d8] p-6 flex gap-4 hover:border-[#2e7d32] transition">
-              <div className="w-12 h-12 rounded-full bg-[#f5f0e6] flex items-center justify-center flex-shrink-0"><Icon size={20} className="text-[#2e7d32]" /></div>
+            <div key={i} className="bg-white rounded-2xl border border-[#eae5d8] p-6 d-flex gap-4 hover:border-[#2e7d32] transition">
+              <div className="w-12 h-12 rounded-circle bg-[#f5f0e6] d-flex align-items-center justify-content-center flex-shrink-0"><Icon size={20} className="text-[#2e7d32]" /></div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-[#6b7360]">{title}</p>
                 {lines.map((l, k) => <p key={k} className="font-serif text-lg text-[#1f2a1a]">{l}</p>)}
@@ -40,9 +40,9 @@ const Contact = () => {
           ))}
           <div className="bg-[#1f2a1a] text-white rounded-2xl p-6">
             <p className="font-serif text-lg mb-3">Follow us</p>
-            <div className="flex gap-2">
+            <div className="d-flex gap-2">
               {[Facebook, Instagram, Twitter, Youtube].map((Ic, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#4a7c2a] flex items-center justify-center transition"><Ic size={16} /></a>
+                <a key={i} href="#" className="w-10 h-10 rounded-circle bg-white/10 hover:bg-[#4a7c2a] d-flex align-items-center justify-content-center transition"><Ic size={16} /></a>
               ))}
             </div>
           </div>
@@ -55,15 +55,15 @@ const Contact = () => {
             {[["name","Your Name*","text"],["email","Your Email*","email"],["phone","Your Phone*","tel"],["subject","Your Subject*","text"]].map(([k,l,t]) => (
               <div key={k}>
                 <label className="text-xs text-[#6b7360] uppercase tracking-widest">{l}</label>
-                <input required value={f[k]} onChange={e => setF({...f, [k]: e.target.value})} type={t} className="mt-1 w-full px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none" />
+                <input required value={f[k]} onChange={e => setF({...f, [k]: e.target.value})} type={t} className="mt-1 w-100 px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none" />
               </div>
             ))}
             <div className="sm:col-span-2">
               <label className="text-xs text-[#6b7360] uppercase tracking-widest">Your Message</label>
-              <textarea rows={5} value={f.message} onChange={e => setF({...f, message: e.target.value})} className="mt-1 w-full px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none resize-none" />
+              <textarea rows={5} value={f.message} onChange={e => setF({...f, message: e.target.value})} className="mt-1 w-100 px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none resize-none" />
             </div>
           </div>
-          <button className="mt-6 btn-primary w-full justify-center">Send Message <Send size={16} /></button>
+          <button className="mt-6 btn-primary w-100 justify-content-center">Send Message <Send size={16} /></button>
         </form>
       </section>
     </main>

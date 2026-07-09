@@ -19,26 +19,26 @@ const Footer = () => {
       <div className="grain-overlay" />
       {/* Newsletter */}
       <div className="relative border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-14 grid md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-14 grid md:grid-cols-2 gap-8 align-items-center">
           <div>
             <h3 className="font-serif text-3xl md:text-4xl text-white">Get Special Offers &amp; Savings</h3>
             <p className="mt-2 text-white/70 text-sm">Latest information on Events, Sales and Offers — straight to your inbox.</p>
           </div>
-          <form onSubmit={subscribe} className="flex gap-2 bg-white/5 border border-white/15 rounded-full p-1.5">
+          <form onSubmit={subscribe} className="d-flex gap-2 bg-white/5 border border-white/15 rounded-circle p-1.5">
             <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="flex-1 bg-transparent px-5 py-3 text-sm focus:outline-none text-white placeholder:text-white/50" />
-            <button className="bg-[#4a7c2a] hover:bg-[#3d6721] text-white px-6 rounded-full font-semibold text-sm flex items-center gap-2 transition"><Send size={14} /> Subscribe</button>
+            <button className="bg-[#4a7c2a] hover:bg-[#3d6721] text-white px-6 rounded-circle font-semibold text-sm d-flex align-items-center gap-2 transition"><Send size={14} /> Subscribe</button>
           </form>
         </div>
       </div>
 
       {/* Main */}
-      <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 flex flex-col md:flex-row flex-wrap justify-between gap-10 md:gap-16">
-        <div className="w-full md:max-w-[320px]">
+      <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 d-flex flex-column md:flex-row flex-wrap justify-content-between gap-10 md:gap-16">
+        <div className="w-100 md:max-w-[320px]">
           <Link to="/" className="inline-block"><img src={LOGO_URL} alt="UB Mart" className="h-16" /></Link>
           <p className="mt-5 text-sm text-white/70 leading-relaxed">Since 2012, we've been bringing you the finest organic and plant-based products, sourced from certified farmers across 13 states.</p>
-          <div className="flex gap-3 mt-6">
+          <div className="d-flex gap-3 mt-6">
             {[Facebook, Instagram, Twitter, Youtube].map((Ic, i) => (
-              <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#4a7c2a] flex items-center justify-center transition"><Ic size={16} /></a>
+              <a key={i} href="#" className="w-10 h-10 rounded-circle bg-white/10 hover:bg-[#4a7c2a] d-flex align-items-center justify-content-center transition"><Ic size={16} /></a>
             ))}
           </div>
         </div>
@@ -61,16 +61,16 @@ const Footer = () => {
         <div>
           <h4 className="font-serif text-lg text-white mb-4">Get in Touch</h4>
           <ul className="space-y-3 text-sm text-white/70">
-            <li className="flex items-start gap-3"><MapPin size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> Corporate Office, New Delhi, India</li>
-            <li className="flex items-start gap-3"><Phone size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> +91 9311223026<br/>+91 7303700961</li>
-            <li className="flex items-start gap-3"><Mail size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> info@ubmarts.com</li>
-            <li className="flex items-start gap-3"><Leaf size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> Mon-Sat: 9:30 AM – 6:30 PM</li>
+            <li className="d-flex align-items-start gap-3"><MapPin size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> Corporate Office, New Delhi, India</li>
+            <li className="d-flex align-items-start gap-3"><Phone size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> +91 9311223026<br/>+91 7303700961</li>
+            <li className="d-flex align-items-start gap-3"><Mail size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> info@ubmarts.com</li>
+            <li className="d-flex align-items-start gap-3"><Leaf size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> Mon-Sat: 9:30 AM – 6:30 PM</li>
           </ul>
         </div>
       </div>
 
       <div className="relative border-t border-white/10">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-5 d-flex flex-column md:flex-row align-items-center justify-content-between gap-3 text-xs text-white/50">
           <span>&copy; {new Date().getFullYear()} UB Mart. All rights reserved. Growing organic since 2012.</span>
           <span>Secure payments via <b className="text-[#a3c86d]">Razorpay</b> • Terms • Privacy Policy</span>
         </div>
