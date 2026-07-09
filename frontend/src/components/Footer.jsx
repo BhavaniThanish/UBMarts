@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail, Send, Leaf } from "lucide-react";
 import { CATEGORIES, LOGO_URL } from "../mock";
-import { useToast } from "../hooks/use-toast";
+import { useToast } from "../context/ToastContext";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -13,66 +12,68 @@ const Footer = () => {
     toast({ title: "Welcome to the family!", description: `We'll send special offers to ${email}` });
     setEmail("");
   };
-
   return (
-    <footer className="relative bg-[#1f2a1a] text-[#e8e2d4] mt-24 overflow-hidden">
-      <div className="grain-overlay" />
-      {/* Newsletter */}
-      <div className="relative border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-14 grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 className="font-serif text-3xl md:text-4xl text-white">Get Special Offers &amp; Savings</h3>
-            <p className="mt-2 text-white/70 text-sm">Latest information on Events, Sales and Offers — straight to your inbox.</p>
+    <footer className="bg-dark-organic mt-5">
+      <div className="grain-overlay"></div>
+
+      <div className="border-bottom" style={{ borderColor: "rgba(255,255,255,.1) !important" }}>
+        <div className="container-xxl px-4 px-lg-5 py-5 row align-items-center g-4 mx-auto">
+          <div className="col-md-6">
+            <h3 className="font-serif text-white" style={{ fontSize: "2.4rem" }}>Get Special Offers &amp; Savings</h3>
+            <p className="mb-0" style={{ color: "rgba(255,255,255,.7)" }}>Latest information on Events, Sales and Offers &mdash; straight to your inbox.</p>
           </div>
-          <form onSubmit={subscribe} className="flex gap-2 bg-white/5 border border-white/15 rounded-full p-1.5">
-            <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="flex-1 bg-transparent px-5 py-3 text-sm focus:outline-none text-white placeholder:text-white/50" />
-            <button className="bg-[#4a7c2a] hover:bg-[#3d6721] text-white px-6 rounded-full font-semibold text-sm flex items-center gap-2 transition"><Send size={14} /> Subscribe</button>
-          </form>
+          <div className="col-md-6">
+            <form className="newsletter-form" onSubmit={subscribe}>
+              <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" />
+              <button type="submit"><i className="bi bi-send"></i> Subscribe</button>
+            </form>
+          </div>
         </div>
       </div>
 
-      {/* Main */}
-      <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
-        <div className="col-span-2 md:col-span-1">
-          <div className="bg-white inline-block p-3 rounded-xl"><img src={LOGO_URL} alt="UB Mart" className="h-14" /></div>
-          <p className="mt-5 text-sm text-white/70 leading-relaxed">Since 2012, we've been bringing you the finest organic and plant-based products, sourced from certified farmers across 13 states.</p>
-          <div className="flex gap-3 mt-6">
-            {[Facebook, Instagram, Twitter, Youtube].map((Ic, i) => (
-              <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#4a7c2a] flex items-center justify-center transition"><Ic size={16} /></a>
-            ))}
+      <div className="container-xxl px-4 px-lg-5 py-5 mx-auto">
+        <div className="row g-4">
+          <div className="col-6 col-md-3">
+            <div className="bg-white d-inline-block p-3 rounded-4"><img src={LOGO_URL} alt="UB Mart" style={{ height: 56 }} /></div>
+            <p className="mt-4 small" style={{ color: "rgba(255,255,255,.7)", lineHeight: 1.7 }}>Since 2012, we've been bringing you the finest organic and plant-based products, sourced from certified farmers across 13 states.</p>
+            <div className="d-flex gap-2 mt-3">
+              {["facebook", "instagram", "twitter-x", "youtube"].map(s => (
+                <a key={s} href="#" className="social-btn" aria-label={s}><i className={`bi bi-${s}`}></i></a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <h4 className="font-serif text-lg text-white mb-4">Explore</h4>
-          <ul className="space-y-2.5 text-sm">
-            {[["/","Home"],["/about","About Us"],["/franchise","Our Franchise"],["/our-video","Our Video"],["/contact","Contact Us"]].map(([to,l]) => (
-              <li key={to}><Link to={to} className="text-white/70 hover:text-[#a3c86d] transition">{l}</Link></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-serif text-lg text-white mb-4">Our Products</h4>
-          <ul className="space-y-2.5 text-sm">
-            {CATEGORIES.map(c => (
-              <li key={c.slug}><Link to={`/products/${c.slug}`} className="text-white/70 hover:text-[#a3c86d] transition">{c.name}</Link></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-serif text-lg text-white mb-4">Get in Touch</h4>
-          <ul className="space-y-3 text-sm text-white/70">
-            <li className="flex items-start gap-3"><MapPin size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> Corporate Office, New Delhi, India</li>
-            <li className="flex items-start gap-3"><Phone size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> +91 9311223026<br/>+91 7303700961</li>
-            <li className="flex items-start gap-3"><Mail size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> info@ubmarts.com</li>
-            <li className="flex items-start gap-3"><Leaf size={16} className="mt-0.5 text-[#a3c86d] flex-shrink-0" /> Mon-Sat: 9:30 AM – 6:30 PM</li>
-          </ul>
+          <div className="col-6 col-md-3">
+            <h4 className="font-serif text-white h5 mb-3">Explore</h4>
+            <ul className="list-unstyled small">
+              {[["/", "Home"], ["/about", "About Us"], ["/franchise", "Our Franchise"], ["/our-video", "Our Video"], ["/contact", "Contact Us"]].map(([to, l]) => (
+                <li key={to} className="mb-2"><Link to={to} className="text-decoration-none" style={{ color: "rgba(255,255,255,.7)" }}>{l}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-6 col-md-3">
+            <h4 className="font-serif text-white h5 mb-3">Our Products</h4>
+            <ul className="list-unstyled small">
+              {CATEGORIES.map(c => (
+                <li key={c.slug} className="mb-2"><Link to={`/products/${c.slug}`} className="text-decoration-none" style={{ color: "rgba(255,255,255,.7)" }}>{c.name}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-6 col-md-3">
+            <h4 className="font-serif text-white h5 mb-3">Get in Touch</h4>
+            <ul className="list-unstyled small" style={{ color: "rgba(255,255,255,.75)" }}>
+              <li className="mb-2 d-flex gap-2"><i className="bi bi-geo-alt-fill" style={{ color: "var(--ub-green-light)" }}></i> Corporate Office, New Delhi</li>
+              <li className="mb-2 d-flex gap-2"><i className="bi bi-telephone-fill" style={{ color: "var(--ub-green-light)" }}></i> +91 9311223026 / +91 7303700961</li>
+              <li className="mb-2 d-flex gap-2"><i className="bi bi-envelope-fill" style={{ color: "var(--ub-green-light)" }}></i> info@ubmarts.com</li>
+              <li className="mb-2 d-flex gap-2"><i className="bi bi-clock-fill" style={{ color: "var(--ub-green-light)" }}></i> Mon–Sat: 9:30 AM – 6:30 PM</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div className="relative border-t border-white/10">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
+      <div className="border-top" style={{ borderColor: "rgba(255,255,255,.1) !important" }}>
+        <div className="container-xxl px-4 px-lg-5 py-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2" style={{ color: "rgba(255,255,255,.5)", fontSize: 12 }}>
           <span>&copy; {new Date().getFullYear()} UB Mart. All rights reserved. Growing organic since 2012.</span>
-          <span>Secure payments via <b className="text-[#a3c86d]">Razorpay</b> • Terms • Privacy Policy</span>
+          <span>Secure payments via <b style={{ color: "var(--ub-green-light)" }}>Razorpay</b> • Terms • Privacy Policy</span>
         </div>
       </div>
     </footer>

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Award, TrendingUp, HandCoins, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
-import { useToast } from "../hooks/use-toast";
+import { useToast } from "../context/ToastContext";
 
 const benefits = [
-  { icon: Award, title: "Established Brand", text: "12+ years of trust, recognition and organic authority." },
-  { icon: TrendingUp, title: "Proven Business Model", text: "Time-tested revenue systems and operational playbooks." },
-  { icon: HandCoins, title: "Attractive ROI", text: "Healthy margins on 300+ premium organic SKUs." },
-  { icon: Sparkles, title: "End-to-end Support", text: "Training, marketing, supply chain — we've got you." },
+  { icon: "award", title: "Established Brand", text: "12+ years of trust, recognition and organic authority." },
+  { icon: "graph-up-arrow", title: "Proven Business Model", text: "Time-tested revenue systems and operational playbooks." },
+  { icon: "cash-coin", title: "Attractive ROI", text: "Healthy margins on 300+ premium organic SKUs." },
+  { icon: "stars", title: "End-to-end Support", text: "Training, marketing, supply chain — we've got you." },
 ];
-
 const steps = [
   "Submit the enquiry form below",
   "Our team schedules a discovery call",
@@ -25,106 +23,102 @@ const Franchise = () => {
     toast({ title: "Enquiry received!", description: "Our franchise team will reach out within 48 hours." });
     setF({ name: "", email: "", phone: "", city: "", investment: "", message: "" });
   };
-
   return (
     <main>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1f2a1a] via-[#2e4a24] to-[#4a7c2a] text-white">
-        <div className="grain-overlay" />
-        <div className="absolute -bottom-24 -right-24 w-[500px] h-[500px] rounded-full bg-[#a3c86d]/15 blur-3xl" />
-        <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-20 md:py-28 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#a3c86d] font-semibold mb-4"><Award size={14} /> Our Franchise</div>
-            <h1 className="font-serif text-5xl md:text-7xl leading-[1.05]">Grow with the <span className="italic text-[#a3c86d]">organic revolution</span></h1>
-            <p className="mt-6 text-white/85 max-w-lg text-lg">Partner with UB Mart and own a piece of India's fastest growing organic movement. Established brand. Proven model. Total support.</p>
-            <a href="#enquiry" className="btn-primary mt-8">Apply Now <ArrowRight size={16} /></a>
-          </div>
-          <div className="relative">
-            <img src="https://images.pexels.com/photos/29039800/pexels-photo-29039800.jpeg?w=1000" alt="farm" className="rounded-[32px] shadow-2xl" />
+      <section className="position-relative overflow-hidden text-white" style={{ background: "linear-gradient(135deg, var(--ub-dark), #2e4a24, var(--ub-green-mid))" }}>
+        <div className="grain-overlay"></div>
+        <div className="blob" style={{ width: 500, height: 500, background: "rgba(163,200,109,.15)", bottom: -100, right: -100 }}></div>
+        <div className="container-xxl px-4 px-lg-5 py-5 py-lg-6 position-relative mx-auto">
+          <div className="row g-5 align-items-center">
+            <div className="col-lg-6">
+              <span className="eyebrow" style={{ color: "var(--ub-green-light)" }}><i className="bi bi-award"></i> Our Franchise</span>
+              <h1 className="section-title text-white mt-3" style={{ fontSize: "clamp(2.5rem,5vw,4.5rem)", lineHeight: 1.1 }}>Grow with the <span className="italic" style={{ color: "var(--ub-green-light)" }}>organic revolution</span></h1>
+              <p className="mt-3 lead" style={{ color: "rgba(255,255,255,.85)", maxWidth: 500 }}>Partner with UB Mart and own a piece of India's fastest growing organic movement. Established brand. Proven model. Total support.</p>
+              <a href="#enquiry" className="btn btn-primary mt-3">Apply Now <i className="bi bi-arrow-right ms-1"></i></a>
+            </div>
+            <div className="col-lg-6">
+              <img src="https://images.pexels.com/photos/29039800/pexels-photo-29039800.jpeg?w=1000" alt="farm" className="w-100 rounded-5xl shadow" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="max-w-[1400px] mx-auto px-5 lg:px-10 py-20">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="font-serif text-4xl md:text-5xl text-[#1f2a1a]">Why partner with <span className="italic text-[#4a7c2a]">UB Mart</span></h2>
-          <p className="mt-4 text-[#6b7360]">A partnership designed to help you thrive from day one.</p>
+      <section className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
+        <div className="text-center mx-auto mb-5" style={{ maxWidth: 640 }}>
+          <h2 className="section-title" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Why partner with <span className="italic">UB Mart</span></h2>
+          <p className="text-muted-2 mt-3">A partnership designed to help you thrive from day one.</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((b, i) => {
-            const Ic = b.icon;
-            return (
-              <div key={i} className="bg-white rounded-2xl p-8 border border-[#eae5d8] hover:-translate-y-1 hover:shadow-xl transition group">
-                <div className="w-14 h-14 rounded-2xl bg-[#f5f0e6] group-hover:bg-[#2e7d32] flex items-center justify-center mb-5 transition">
-                  <Ic size={24} className="text-[#2e7d32] group-hover:text-white transition" />
-                </div>
-                <h3 className="font-serif text-2xl text-[#1f2a1a]">{b.title}</h3>
-                <p className="mt-2 text-sm text-[#6b7360]">{b.text}</p>
+        <div className="row g-4">
+          {benefits.map(b => (
+            <div key={b.title} className="col-6 col-lg-3">
+              <div className="h-100 bg-white p-4 rounded-4xl" style={{ border: "1px solid var(--ub-border)" }}>
+                <div className="feat-icon" style={{ borderRadius: 16 }}><i className={`bi bi-${b.icon}`}></i></div>
+                <h3 className="font-serif h4 mt-3">{b.title}</h3>
+                <p className="small text-muted-2 mb-0">{b.text}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="bg-[#f5f0e6]">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-10 py-20 grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#4a7c2a] font-semibold mb-4">How it Works</div>
-            <h2 className="font-serif text-4xl md:text-5xl text-[#1f2a1a]">Five steps to <span className="italic text-[#4a7c2a]">ownership</span></h2>
-            <ol className="mt-8 space-y-5">
-              {steps.map((s, i) => (
-                <li key={i} className="flex gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#2e7d32] text-white font-serif text-lg flex items-center justify-center">{i+1}</span>
-                  <div className="pt-1.5">
-                    <p className="text-[#1f2a1a] font-medium">{s}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div className="img-reveal rounded-[32px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=1000" alt="farm" className="w-full h-[540px] object-cover" />
+      <section className="bg-cream">
+        <div className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
+          <div className="row g-5 align-items-center">
+            <div className="col-lg-6">
+              <span className="eyebrow">How it Works</span>
+              <h2 className="section-title mt-2" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Five steps to <span className="italic">ownership</span></h2>
+              <ol className="list-unstyled mt-4">
+                {steps.map((s, i) => (
+                  <li key={s} className="d-flex gap-3 mb-4">
+                    <span className="d-inline-flex align-items-center justify-content-center rounded-circle fw-bold" style={{ width: 44, height: 44, background: "var(--ub-green)", color: "#fff", fontFamily: "'Playfair Display',serif" }}>{i + 1}</span>
+                    <span className="pt-2 fw-medium">{s}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="col-lg-6">
+              <div className="img-reveal"><img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=1000" alt="farm" className="w-100" style={{ height: 540, objectFit: "cover", display: "block" }} /></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Enquiry form */}
-      <section id="enquiry" className="max-w-[1400px] mx-auto px-5 lg:px-10 py-20">
-        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#4a7c2a] font-semibold mb-4">Franchise Enquiry</div>
-            <h2 className="font-serif text-4xl md:text-5xl text-[#1f2a1a]">Ready to <span className="italic text-[#4a7c2a]">start?</span></h2>
-            <p className="mt-4 text-[#3a4530]">Fill in the details and our franchise team will reach out within 48 hours to guide you through the next steps.</p>
-            <ul className="mt-6 space-y-3 text-sm text-[#3a4530]">
-              {["Zero royalty for the first 6 months","Complete on-site training","Dedicated relationship manager","Marketing kit worth ₹1,00,000"].map((t, i) => (
-                <li key={i} className="flex gap-3"><CheckCircle2 size={18} className="text-[#2e7d32] flex-shrink-0" /> {t}</li>
+      <section id="enquiry" className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
+        <div className="row g-4">
+          <div className="col-lg-5">
+            <span className="eyebrow">Franchise Enquiry</span>
+            <h2 className="section-title mt-2" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Ready to <span className="italic">start?</span></h2>
+            <p className="text-muted-2 mt-3">Fill in the details and our franchise team will reach out within 48 hours to guide you through the next steps.</p>
+            <ul className="list-unstyled mt-3">
+              {["Zero royalty for the first 6 months", "Complete on-site training", "Dedicated relationship manager", "Marketing kit worth ₹1,00,000"].map(t => (
+                <li key={t} className="d-flex gap-2 mb-2 small" style={{ color: "var(--ub-text)" }}><i className="bi bi-check-circle-fill" style={{ color: "var(--ub-green)" }}></i> {t}</li>
               ))}
             </ul>
           </div>
-          <form onSubmit={submit} className="bg-white rounded-[32px] p-8 md:p-10 border border-[#eae5d8] grid sm:grid-cols-2 gap-4">
-            {[["name","Full Name*","text"],["email","Email*","email"],["phone","Phone*","tel"],["city","City*","text"]].map(([k,l,t]) => (
-              <div key={k}>
-                <label className="text-xs text-[#6b7360] uppercase tracking-widest">{l}</label>
-                <input required value={f[k]} onChange={e => setF({...f, [k]: e.target.value})} type={t} className="mt-1 w-full px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none" />
+          <div className="col-lg-7">
+            <form className="bg-white rounded-5xl p-4 p-md-5 row g-3" onSubmit={submit} style={{ border: "1px solid var(--ub-border)" }}>
+              {[["name", "Full Name*", "text"], ["email", "Email*", "email"], ["phone", "Phone*", "tel"], ["city", "City*", "text"]].map(([k, l, t]) => (
+                <div key={k} className="col-md-6">
+                  <label className="eyebrow d-block mb-1">{l}</label>
+                  <input required type={t} value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} className="form-control rounded-3" style={{ background: "var(--ub-cream)" }} />
+                </div>
+              ))}
+              <div className="col-12">
+                <label className="eyebrow d-block mb-1">Investment Range</label>
+                <select value={f.investment} onChange={e => setF({ ...f, investment: e.target.value })} className="form-select rounded-3" style={{ background: "var(--ub-cream)" }}>
+                  <option value="">Select budget</option>
+                  <option>₹15L - ₹25L</option>
+                  <option>₹25L - ₹50L</option>
+                  <option>₹50L+</option>
+                </select>
               </div>
-            ))}
-            <div className="sm:col-span-2">
-              <label className="text-xs text-[#6b7360] uppercase tracking-widest">Investment Range</label>
-              <select value={f.investment} onChange={e => setF({...f, investment: e.target.value})} className="mt-1 w-full px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none">
-                <option value="">Select budget</option>
-                <option>₹15L - ₹25L</option>
-                <option>₹25L - ₹50L</option>
-                <option>₹50L+</option>
-              </select>
-            </div>
-            <div className="sm:col-span-2">
-              <label className="text-xs text-[#6b7360] uppercase tracking-widest">Message</label>
-              <textarea rows={4} value={f.message} onChange={e => setF({...f, message: e.target.value})} className="mt-1 w-full px-4 py-3 rounded-xl border border-[#eae5d8] bg-[#faf7f2] focus:bg-white focus:border-[#2e7d32] focus:outline-none resize-none" />
-            </div>
-            <button className="sm:col-span-2 btn-primary justify-center">Submit Enquiry <ArrowRight size={16} /></button>
-          </form>
+              <div className="col-12">
+                <label className="eyebrow d-block mb-1">Message</label>
+                <textarea rows={4} value={f.message} onChange={e => setF({ ...f, message: e.target.value })} className="form-control rounded-3" style={{ background: "var(--ub-cream)" }} />
+              </div>
+              <div className="col-12"><button className="btn btn-primary w-100">Submit Enquiry <i className="bi bi-arrow-right ms-1"></i></button></div>
+            </form>
+          </div>
         </div>
       </section>
     </main>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Search, ShoppingBag, ChevronDown, Menu, X, User } from "lucide-react";
 import { CATEGORIES, LOGO_URL, PRODUCTS } from "../mock";
 import { useCart } from "../context/CartContext";
+
+const navItemsLeft = [["/", "Home"], ["/about", "About Us"], ["/franchise", "Our Franchise"]];
+const navItemsRight = [["/our-video", "Our Video"], ["/contact", "Contact Us"]];
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -21,83 +23,85 @@ const Header = () => {
 
   useEffect(() => { setMobileOpen(false); setSearchOpen(false); }, [location]);
 
-  const matches = searchQ.length > 1 ? PRODUCTS.filter(p => p.name.toLowerCase().includes(searchQ.toLowerCase())).slice(0,6) : [];
+  const matches = searchQ.length > 1 ? PRODUCTS.filter(p => p.name.toLowerCase().includes(searchQ.toLowerCase())).slice(0, 6) : [];
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_4px_30px_-10px_rgba(46,125,50,0.2)]" : "bg-white/80 backdrop-blur-sm"}`}>
-      <div className="max-w-[1400px] mx-auto px-5 lg:px-10">
-        <div className="flex items-center justify-between h-20">
-          {/* Left nav */}
-          <nav className="hidden lg:flex items-center gap-8 flex-1">
-            <NavLink to="/" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>Home</NavLink>
-            <NavLink to="/about" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>About Us</NavLink>
-            <NavLink to="/franchise" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>Our Franchise</NavLink>
+    <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
+      <div className="container-xxl px-4 px-lg-5">
+        <div className="d-flex align-items-center justify-content-between" style={{ height: 80 }}>
+          {/* Left nav (desktop) */}
+          <nav className="d-none d-lg-flex align-items-center gap-4 flex-fill">
+            {navItemsLeft.map(([to, l]) => (
+              <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>{l}</NavLink>
+            ))}
           </nav>
 
-          {/* Logo center */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <img src={LOGO_URL} alt="UB Mart" className="h-14 md:h-16 transition-transform group-hover:scale-105" />
+          {/* Logo */}
+          <Link to="/" className="d-inline-flex align-items-center">
+            <img src={LOGO_URL} alt="UB Mart" style={{ height: 64 }} />
           </Link>
 
           {/* Right nav */}
-          <nav className="hidden lg:flex items-center gap-8 flex-1 justify-end">
-            <div className="dropdown-parent relative">
-              <button className="nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] flex items-center gap-1">
-                Our Products <ChevronDown size={14} />
+          <nav className="d-none d-lg-flex align-items-center gap-4 flex-fill justify-content-end">
+            <div className="dropdown mega-dropdown dropdown-menu-end-hover">
+              <button className="nav-link btn btn-link p-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Our Products
               </button>
-              <div className="dropdown-menu absolute right-0 top-full mt-4 w-72 bg-white rounded-xl shadow-2xl border border-[#e8e2d4] overflow-hidden">
-                <div className="p-2">
-                  {CATEGORIES.map(c => (
-                    <Link key={c.slug} to={`/products/${c.slug}`} className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#f5f0e6] transition group">
-                      <div className="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0">
-                        <img src={c.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                      </div>
+              <ul className="dropdown-menu dropdown-menu-end">
+                {CATEGORIES.map(c => (
+                  <li key={c.slug}>
+                    <Link className="mega-item" to={`/products/${c.slug}`}>
+                      <img src={c.image} alt="" />
                       <div>
-                        <div className="text-sm font-semibold text-[#1f2a1a] group-hover:text-[#2e7d32]">{c.name}</div>
-                        <div className="text-xs text-[#6b7360]">{c.tagline}</div>
+                        <div className="fw-semibold small text-dark">{c.name}</div>
+                        <div className="text-muted" style={{ fontSize: "11px" }}>{c.tagline}</div>
                       </div>
                     </Link>
-                  ))}
-                </div>
-                <Link to="/products" className="block text-center text-xs uppercase tracking-widest font-semibold bg-[#f5f0e6] text-[#2e7d32] py-3 hover:bg-[#2e7d32] hover:text-white transition">Shop All Products</Link>
-              </div>
+                  </li>
+                ))}
+                <li className="mt-2">
+                  <Link to="/products" className="d-block text-center text-uppercase small fw-semibold py-2 rounded-3" style={{ letterSpacing: ".2em", background: "var(--ub-cream-2)", color: "var(--ub-green)" }}>Shop All Products</Link>
+                </li>
+              </ul>
             </div>
-            <NavLink to="/our-video" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>Our Video</NavLink>
-            <NavLink to="/contact" className={({isActive}) => `nav-link text-sm font-medium tracking-wide text-[#1f2a1a] hover:text-[#2e7d32] ${isActive ? "active text-[#2e7d32]" : ""}`}>Contact Us</NavLink>
-            <div className="flex items-center gap-3 pl-2 border-l border-[#e8e2d4]">
-              <button onClick={() => setSearchOpen(v => !v)} className="p-2 rounded-full hover:bg-[#f5f0e6] transition" aria-label="search"><Search size={18} /></button>
-              <button onClick={() => setIsOpen(true)} className="relative p-2 rounded-full hover:bg-[#f5f0e6] transition" aria-label="cart">
-                <ShoppingBag size={18} />
-                {count > 0 && <span className="absolute -top-0.5 -right-0.5 bg-[#2e7d32] text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold">{count}</span>}
+            {navItemsRight.map(([to, l]) => (
+              <NavLink key={to} to={to} className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>{l}</NavLink>
+            ))}
+            <div className="d-flex align-items-center gap-1 ps-3 border-start" style={{ borderColor: "var(--ub-border)" }}>
+              <button className="icon-btn" onClick={() => setSearchOpen(v => !v)} aria-label="search"><i className="bi bi-search"></i></button>
+              <button className="icon-btn" onClick={() => setIsOpen(true)} aria-label="cart">
+                <i className="bi bi-bag"></i>
+                {count > 0 && <span className="cart-badge">{count}</span>}
               </button>
             </div>
           </nav>
 
           {/* Mobile */}
-          <div className="flex lg:hidden items-center gap-2">
-            <button onClick={() => setSearchOpen(v => !v)} className="p-2" aria-label="search"><Search size={20} /></button>
-            <button onClick={() => setIsOpen(true)} className="relative p-2" aria-label="cart">
-              <ShoppingBag size={20} />
-              {count > 0 && <span className="absolute top-0 right-0 bg-[#2e7d32] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">{count}</span>}
+          <div className="d-flex d-lg-none align-items-center gap-1">
+            <button className="icon-btn" onClick={() => setSearchOpen(v => !v)} aria-label="search"><i className="bi bi-search"></i></button>
+            <button className="icon-btn" onClick={() => setIsOpen(true)} aria-label="cart">
+              <i className="bi bi-bag"></i>
+              {count > 0 && <span className="cart-badge">{count}</span>}
             </button>
-            <button onClick={() => setMobileOpen(v => !v)} className="p-2" aria-label="menu">{mobileOpen ? <X size={22} /> : <Menu size={22} />}</button>
+            <button className="icon-btn" onClick={() => setMobileOpen(v => !v)} aria-label="menu">
+              <i className={`bi ${mobileOpen ? "bi-x-lg" : "bi-list"}`}></i>
+            </button>
           </div>
         </div>
 
-        {/* Search dropdown */}
         {searchOpen && (
-          <div className="animate-fadeIn pb-5">
-            <div className="relative max-w-2xl mx-auto">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6b7360]" />
-              <input autoFocus value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search organic products..." className="w-full pl-11 pr-4 py-3 rounded-full border border-[#e8e2d4] focus:border-[#2e7d32] focus:outline-none bg-[#faf7f2] text-sm" />
+          <div className="pb-3 animate-fadeIn">
+            <div className="position-relative mx-auto" style={{ maxWidth: 640 }}>
+              <i className="bi bi-search position-absolute" style={{ left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--ub-muted)" }}></i>
+              <input autoFocus value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search organic products..." className="form-control rounded-pill" style={{ paddingLeft: 44, paddingRight: 20, height: 46 }} />
               {matches.length > 0 && (
-                <div className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-[#e8e2d4] p-2 z-40">
+                <div className="position-absolute w-100 mt-2 bg-white rounded-4 shadow-lg p-2" style={{ border: "1px solid var(--ub-border)", zIndex: 40 }}>
                   {matches.map(p => (
-                    <button key={p.id} onClick={() => { navigate(`/product/${p.id}`); setSearchOpen(false); setSearchQ(""); }} className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-[#f5f0e6] text-left transition">
-                      <img src={p.image} alt="" className="w-10 h-10 rounded object-cover" />
-                      <div className="flex-1">
-                        <div className="text-sm font-medium text-[#1f2a1a]">{p.name}</div>
-                        <div className="text-xs text-[#6b7360]">&#8377;{p.price}</div>
+                    <button key={p.id} type="button" onClick={() => { navigate(`/product/${p.id}`); setSearchOpen(false); setSearchQ(""); }} className="btn w-100 d-flex align-items-center gap-3 text-start p-2 rounded-3" style={{ background: "transparent" }}>
+                      <img src={p.image} alt="" width={40} height={40} style={{ objectFit: "cover", borderRadius: 6 }} />
+                      <div>
+                        <div className="small fw-medium">{p.name}</div>
+                        <div className="text-muted" style={{ fontSize: 12 }}>&#8377;{p.price}</div>
                       </div>
                     </button>
                   ))}
@@ -110,15 +114,15 @@ const Header = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-[#e8e2d4] bg-white animate-fadeIn">
-          <div className="p-5 flex flex-col gap-1">
-            {[["/","Home"],["/about","About Us"],["/franchise","Our Franchise"],["/products","Our Products"],["/our-video","Our Video"],["/contact","Contact Us"]].map(([to,label]) => (
-              <NavLink key={to} to={to} className={({isActive}) => `px-4 py-3 rounded-lg font-medium ${isActive ? "bg-[#f5f0e6] text-[#2e7d32]" : "text-[#1f2a1a]"} hover:bg-[#f5f0e6]`}>{label}</NavLink>
+        <div className="d-lg-none bg-white animate-fadeIn" style={{ borderTop: "1px solid var(--ub-border)" }}>
+          <div className="p-3 d-flex flex-column">
+            {[["/", "Home"], ["/about", "About Us"], ["/franchise", "Our Franchise"], ["/products", "Our Products"], ["/our-video", "Our Video"], ["/contact", "Contact Us"]].map(([to, l]) => (
+              <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => `px-3 py-2 rounded-3 fw-medium ${isActive ? "bg-cream text-success" : "text-dark"}`}>{l}</NavLink>
             ))}
-            <div className="pl-4 pt-2">
-              <div className="text-xs uppercase tracking-widest text-[#6b7360] mb-2">Categories</div>
+            <div className="px-3 pt-3">
+              <div className="text-uppercase text-muted small mb-2" style={{ letterSpacing: ".2em", fontSize: 11 }}>Categories</div>
               {CATEGORIES.map(c => (
-                <Link key={c.slug} to={`/products/${c.slug}`} className="block px-2 py-2 text-sm text-[#3a4530] hover:text-[#2e7d32]">{c.name}</Link>
+                <Link key={c.slug} to={`/products/${c.slug}`} className="d-block py-2 small" style={{ color: "var(--ub-text)" }}>{c.name}</Link>
               ))}
             </div>
           </div>
