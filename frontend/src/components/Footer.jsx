@@ -34,7 +34,7 @@ const Footer = () => {
       {/* Main */}
       <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
         <div className="col-span-2 md:col-span-1">
-          <div className="bg-white inline-block p-3 rounded-xl"><img src={LOGO_URL} alt="UB Mart" className="h-14" /></div>
+          <Link to="/" className="inline-block"><img src={LOGO_URL} alt="UB Mart" className="h-16" /></Link>
           <p className="mt-5 text-sm text-white/70 leading-relaxed">Since 2012, we've been bringing you the finest organic and plant-based products, sourced from certified farmers across 13 states.</p>
           <div className="flex gap-3 mt-6">
             {[Facebook, Instagram, Twitter, Youtube].map((Ic, i) => (
