@@ -195,52 +195,22 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Franchise CTA (with Testimonials theme) */}
       <section className="bg-[#1f2a1a] text-white relative overflow-hidden">
         <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#4a7c2a]/20 blur-3xl" />
         <div className="grain-overlay" />
         <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-20">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#a3c86d] font-semibold mb-4"><Quote size={14} /> Testimonials</div>
-            <h2 className="font-serif text-4xl md:text-5xl">Loved by <span className="italic text-[#a3c86d]">50,000+</span> families</h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition group">
-                <Quote size={28} className="text-[#a3c86d] mb-4" />
-                <p className="text-sm leading-relaxed text-white/90">“{t.text}”</p>
-                <div className="mt-6 flex items-center gap-3">
-                  <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full object-cover" />
-                  <div>
-                    <p className="font-medium text-sm">{t.name}</p>
-                    <p className="text-xs text-white/60">{t.role}</p>
-                  </div>
-                </div>
-                <div className="mt-3 flex gap-0.5">
-                  {[...Array(t.rating)].map((_, k) => <Star key={k} size={12} className="fill-[#e6a817] text-[#e6a817]" />)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Franchise CTA */}
-      <section className="max-w-[1400px] mx-auto px-5 lg:px-10 py-20">
-        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#2e7d32] to-[#4a7c2a] p-10 md:p-16 text-white">
-          <div className="grain-overlay" />
-          <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" />
           <div className="relative grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] font-semibold mb-4"><Award size={14} /> Franchise Opportunity</div>
-              <h2 className="font-serif text-4xl md:text-5xl leading-tight">Grow with us. <span className="italic">Own an organic empire.</span></h2>
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] font-semibold mb-4 text-[#a3c86d]"><Award size={14} /> Franchise Opportunity</div>
+              <h2 className="font-serif text-4xl md:text-5xl leading-tight">Grow with us. <span className="italic text-[#a3c86d]">Own an organic empire.</span></h2>
               <p className="mt-4 text-white/85 max-w-lg">Partner with UB Mart and be part of India's largest organic movement. Established brand, proven model, dedicated support.</p>
-              <Link to="/franchise" className="mt-8 inline-flex items-center gap-2 bg-white text-[#2e7d32] px-7 py-3 rounded-full font-semibold hover:bg-[#f5f0e6] transition">Explore Franchise <ArrowRight size={16} /></Link>
+              <Link to="/franchise" className="mt-8 inline-flex items-center gap-2 bg-[#a3c86d] text-[#1f2a1a] px-7 py-3 rounded-full font-semibold hover:bg-white transition">Explore Franchise <ArrowRight size={16} /></Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[["300+","Products"],["13","States"],["50K+","Customers"],["12+","Years"]].map(([v,l], i) => (
-                <div key={i} className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-6">
-                  <p className="font-serif text-4xl">{v}</p>
+                <div key={i} className="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition group">
+                  <p className="font-serif text-4xl text-[#a3c86d]">{v}</p>
                   <p className="text-sm text-white/80 mt-1">{l}</p>
                 </div>
               ))}
