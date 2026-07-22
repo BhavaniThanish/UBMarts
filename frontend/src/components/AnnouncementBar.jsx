@@ -5,17 +5,21 @@ const AnnouncementBar = () => {
   if (!visible) return null;
   return (
     <div className="announce-bar">
-      <div className="marquee-track">
+      <div className="track">
         {[0, 1].map(k => (
           <div key={k}>
-            <span><i className="bi bi-stars text-warning me-1"></i><b>10% OFF</b> use code <span className="code-badge">PORTO10</span></span>
+            <span><b>10% OFF</b> — use code <span className="code">PORTO10</span></span>
+            <span className="dot" />
             <span>Free next-day delivery on orders over &#8377;499</span>
+            <span className="dot" />
             <span>Farm-fresh organic, delivered to your door</span>
-            <span><i className="bi bi-stars text-warning me-1"></i>300+ products • 13 states • 12+ years of trust</span>
+            <span className="dot" />
+            <span>300+ products • 13 states • 12+ years of trust</span>
+            <span className="dot" />
           </div>
         ))}
       </div>
-      <button onClick={() => setVisible(false)} aria-label="close" className="btn btn-sm text-white position-absolute" style={{ right: 8, top: 4, background: "transparent", border: 0 }}>
+      <button onClick={() => setVisible(false)} aria-label="close" className="btn btn-sm position-absolute text-white" style={{ right: 8, top: 4, background: "transparent", border: 0 }}>
         <i className="bi bi-x-lg small"></i>
       </button>
     </div>

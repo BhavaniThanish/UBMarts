@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useToast } from "../context/ToastContext";
 
 const infos = [
-  { icon: "telephone-fill", title: "Phone", lines: ["+91 9311223026", "+91 7303700961"] },
-  { icon: "envelope-fill", title: "Email", lines: ["info@ubmarts.com"] },
-  { icon: "geo-alt-fill", title: "Office", lines: ["Corporate Office", "New Delhi, India"] },
-  { icon: "clock-fill", title: "Business Hours", lines: ["Mon–Sat: 9:30 AM – 6:30 PM", "Sunday – Closed"] },
+  { icon: "telephone", title: "Phone", lines: ["+91 9311223026", "+91 7303700961"] },
+  { icon: "envelope", title: "Email", lines: ["info@ubmarts.com"] },
+  { icon: "geo-alt", title: "Office", lines: ["Corporate Office", "New Delhi, India"] },
+  { icon: "clock", title: "Business Hours", lines: ["Mon–Sat: 9:30 AM – 6:30 PM", "Sunday – Closed"] },
 ];
 
 const Contact = () => {
@@ -18,52 +18,54 @@ const Contact = () => {
   };
   return (
     <main>
-      <section className="page-header">
-        <div className="crumb">Home / Contact Us</div>
-        <h1>Get in <span className="italic" style={{ color: "var(--ub-green-mid)" }}>Touch</span></h1>
-        <p className="text-muted-2 mx-auto mt-3" style={{ maxWidth: 600 }}>We'd love to hear from you — whether it's a question, feedback or a partnership opportunity.</p>
+      <section className="page-header-2">
+        <div className="bg-word">Hello</div>
+        <div className="container container-editorial px-3 px-lg-4 position-relative">
+          <div className="crumb">Home / Contact</div>
+          <h1>Get in <span className="em">touch</span></h1>
+          <p className="text-muted-2 mt-3" style={{ maxWidth: 620 }}>We'd love to hear from you — whether it's a question, feedback or a partnership opportunity.</p>
+        </div>
       </section>
 
-      <section className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
-        <div className="row g-4">
-          <div className="col-lg-5">
-            <div className="d-flex flex-column gap-3">
-              {infos.map(info => (
-                <div key={info.title} className="bg-white rounded-4xl p-3 d-flex gap-3" style={{ border: "1px solid var(--ub-border)" }}>
-                  <div className="feat-icon" style={{ minWidth: 56 }}><i className={`bi bi-${info.icon}`}></i></div>
-                  <div>
-                    <div className="eyebrow" style={{ letterSpacing: ".25em" }}>{info.title}</div>
-                    {info.lines.map(l => <div key={l} className="font-serif h6 mb-0">{l}</div>)}
-                  </div>
-                </div>
-              ))}
-              <div className="bg-dark-organic text-white rounded-4xl p-3">
-                <div className="font-serif h6 mb-2">Follow us</div>
-                <div className="d-flex gap-2">
-                  {["facebook", "instagram", "twitter-x", "youtube"].map(s => (
-                    <a key={s} href="#" className="social-btn"><i className={`bi bi-${s}`}></i></a>
-                  ))}
-                </div>
+      <section className="container container-editorial px-3 px-lg-4 py-5 py-lg-6">
+        <div className="row g-4 mb-5">
+          {infos.map(info => (
+            <div key={info.title} className="col-6 col-lg-3">
+              <div className="h-100 p-4" style={{ background: "#fff", border: "1px solid var(--ub-border)" }}>
+                <i className={`bi bi-${info.icon}`} style={{ fontSize: 24, color: "var(--ub-terracotta)" }}></i>
+                <div className="eyebrow mt-3">{info.title}</div>
+                {info.lines.map(l => <div key={l} style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.1rem", marginTop: 4 }}>{l}</div>)}
               </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="row g-5 align-items-center">
+          <div className="col-lg-5">
+            <span className="eyebrow">Say hello</span>
+            <h2 className="section-title mt-2" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Let's start a <span className="em">conversation</span></h2>
+            <p className="text-muted-2 mt-3">We respond to every enquiry within one business day. Whether you're curious about a product, want to collaborate, or just want to chat organic — write to us.</p>
+            <div className="mt-4 d-flex gap-2">
+              {["facebook", "instagram", "twitter-x", "youtube"].map(s => (
+                <a key={s} href="#" className="social-btn" style={{ borderColor: "var(--ub-border)", color: "var(--ub-dark)" }}><i className={`bi bi-${s}`}></i></a>
+              ))}
             </div>
           </div>
           <div className="col-lg-7">
-            <form className="bg-white rounded-5xl p-4 p-md-5" onSubmit={submit} style={{ border: "1px solid var(--ub-border)" }}>
-              <h2 className="section-title" style={{ fontSize: "clamp(1.75rem,3vw,2.5rem)" }}>Send us a <span className="italic">message</span></h2>
-              <p className="text-muted-2 small">We respond within one business day.</p>
-              <div className="row g-3 mt-2">
+            <form className="p-4 p-lg-5" onSubmit={submit} style={{ background: "#fff", border: "1px solid var(--ub-border)" }}>
+              <div className="row g-3">
                 {[["name", "Your Name*", "text"], ["email", "Your Email*", "email"], ["phone", "Your Phone*", "tel"], ["subject", "Your Subject*", "text"]].map(([k, l, t]) => (
                   <div key={k} className="col-md-6">
-                    <label className="eyebrow d-block mb-1">{l}</label>
-                    <input required type={t} value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} className="form-control rounded-3" style={{ background: "var(--ub-cream)" }} />
+                    <label className="eyebrow d-block mb-2">{l}</label>
+                    <input required type={t} value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} className="form-control" />
                   </div>
                 ))}
                 <div className="col-12">
-                  <label className="eyebrow d-block mb-1">Your Message</label>
-                  <textarea rows={5} value={f.message} onChange={e => setF({ ...f, message: e.target.value })} className="form-control rounded-3" style={{ background: "var(--ub-cream)" }} />
+                  <label className="eyebrow d-block mb-2">Your Message</label>
+                  <textarea rows={5} value={f.message} onChange={e => setF({ ...f, message: e.target.value })} className="form-control" />
                 </div>
               </div>
-              <button className="btn btn-primary w-100 mt-3">Send Message <i className="bi bi-send ms-1"></i></button>
+              <button className="btn btn-primary w-100 mt-4">Send Message <i className="bi bi-arrow-right ms-2"></i></button>
             </form>
           </div>
         </div>

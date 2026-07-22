@@ -19,7 +19,6 @@ import Contact from "./pages/Contact";
 
 function App() {
   useEffect(() => {
-    // Load bootstrap JS (for collapse/dropdown behavior on mobile)
     import("bootstrap/dist/js/bootstrap.bundle.min.js").catch(() => {});
   }, []);
   return (

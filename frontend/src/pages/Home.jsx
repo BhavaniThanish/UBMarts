@@ -7,121 +7,128 @@ const iconMap = { Truck: "truck", Phone: "telephone", ShieldCheck: "shield-check
 
 const Home = () => {
   const [slide, setSlide] = useState(0);
+  const [testi, setTesti] = useState(0);
+
   useEffect(() => {
-    const t = setInterval(() => setSlide(s => (s + 1) % HERO_SLIDES.length), 6000);
+    const t = setInterval(() => setSlide(s => (s + 1) % HERO_SLIDES.length), 7000);
     return () => clearInterval(t);
   }, []);
+  useEffect(() => {
+    const t = setInterval(() => setTesti(s => (s + 1) % TESTIMONIALS.length), 6000);
+    return () => clearInterval(t);
+  }, []);
+
   const featured = PRODUCTS.slice(0, 8);
+  const currentSlide = HERO_SLIDES[slide];
+  const currentTesti = TESTIMONIALS[testi];
 
   return (
     <main>
-      {/* HERO */}
-      <section className="hero-premium-bg">
-        <div className="hero-leaves-l" />
-        <div className="hero-leaves-r" />
-        <div className="hero-sunray" />
-        <div className="hero-organic-lines" />
-        <div className="hero-paper-tex" />
-
-        {/* botanical branch top-right */}
-        <svg className="hero-branch" style={{ top: -20, right: "8%", width: 180 }} viewBox="0 0 200 240" fill="none">
-          <path d="M100 240 Q 95 180 105 140 Q 115 100 100 60 Q 85 30 95 5" stroke="#2e5a2b" strokeWidth="2" strokeLinecap="round" opacity="0.55" />
-          <g fill="#4a7c2a" opacity="0.55">
-            <ellipse cx="80" cy="200" rx="22" ry="8" transform="rotate(-30 80 200)" />
-            <ellipse cx="125" cy="175" rx="20" ry="7" transform="rotate(25 125 175)" />
-            <ellipse cx="82" cy="145" rx="24" ry="8" transform="rotate(-25 82 145)" />
-            <ellipse cx="122" cy="115" rx="20" ry="7" transform="rotate(30 122 115)" />
-            <ellipse cx="82" cy="85" rx="22" ry="7" transform="rotate(-30 82 85)" />
-            <ellipse cx="118" cy="55" rx="18" ry="6" transform="rotate(25 118 55)" />
-            <ellipse cx="88" cy="28" rx="16" ry="5" transform="rotate(-25 88 28)" />
-          </g>
+      {/* HERO EDITORIAL */}
+      <section className="hero-editorial">
+        <div className="bg-word top">Organic</div>
+        {/* Decorative leaves */}
+        <svg className="leaf-1" viewBox="0 0 120 160" fill="none">
+          <path d="M60 8 C 22 42, 12 100, 55 154 C 82 130, 116 78, 106 40 C 100 18, 82 8, 60 8Z" fill="#4a7c2a" opacity="0.55" />
+          <path d="M62 20 L 60 148" stroke="#2b5a2b" strokeWidth="1.5" opacity="0.6" />
         </svg>
-        {/* fern bottom-left */}
-        <svg className="hero-branch" style={{ bottom: -30, left: "3%", width: 200, animationDelay: "2s" }} viewBox="0 0 200 240" fill="none">
-          <path d="M100 240 Q 105 180 95 140 Q 85 90 105 40 Q 115 15 105 0" stroke="#2e5a2b" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
-          <g fill="#6b8e23" opacity="0.45">
-            <ellipse cx="122" cy="200" rx="22" ry="7" transform="rotate(30 122 200)" />
-            <ellipse cx="80" cy="170" rx="20" ry="7" transform="rotate(-30 80 170)" />
-            <ellipse cx="118" cy="140" rx="22" ry="7" transform="rotate(25 118 140)" />
-            <ellipse cx="80" cy="105" rx="24" ry="8" transform="rotate(-30 80 105)" />
-            <ellipse cx="120" cy="70" rx="20" ry="7" transform="rotate(30 120 70)" />
-            <ellipse cx="88" cy="35" rx="18" ry="6" transform="rotate(-25 88 35)" />
-          </g>
+        <svg className="leaf-2" viewBox="0 0 120 160" fill="none">
+          <path d="M60 8 C 22 42, 12 100, 55 154 C 82 130, 116 78, 106 40 C 100 18, 82 8, 60 8Z" fill="#b45f3e" opacity="0.5" transform="rotate(35 60 80)" />
         </svg>
-        <div className="grain-overlay" />
 
-        <div className="container-xxl px-4 px-lg-5 py-5 py-lg-6 position-relative mx-auto">
+        <div className="container container-editorial px-3 px-lg-4 position-relative">
           <div className="row g-5 align-items-center">
-            <div className="col-lg-6">
-              {HERO_SLIDES.map((s, i) => i === slide && (
-                <div key={s.title} className="animate-fadeUp">
-                  <span className="eyebrow bg-white bg-opacity-75 px-3 py-2 rounded-pill" style={{ border: "1px solid rgba(74,124,42,.2)" }}>
-                    <i className="bi bi-flower1"></i> {s.tagline}
-                  </span>
-                  <h1 className="section-title mt-4" style={{ fontSize: "clamp(2.6rem, 5vw, 4.6rem)", fontWeight: 600 }}>
-                    {s.title.split(" ").map((w, k) => (
-                      <span key={k} className={k === 1 ? "italic" : ""}>{w} </span>
-                    ))}
-                  </h1>
-                  <p className="mt-3 lead" style={{ color: "var(--ub-text)", maxWidth: 500 }}>{s.subtitle}</p>
-                  <div className="mt-4 d-flex flex-wrap align-items-center gap-3">
-                    <Link to={s.href} className="btn btn-primary">{s.cta} <i className="bi bi-arrow-right ms-1"></i></Link>
-                    <Link to="/about" className="btn btn-outline-primary">Our Story</Link>
-                  </div>
+            <div className="col-lg-7">
+              <div className="animate-fadeUp" key={currentSlide.title}>
+                <span className="eyebrow"><span style={{ display: "inline-block", width: 24, height: 1, background: "var(--ub-terracotta)" }} /> {currentSlide.tagline}</span>
+                <h1 className="hero-headline mt-3">
+                  {currentSlide.title.split(" ").map((w, k) => (
+                    <span key={k} className={k === 1 ? "em" : ""}>{w} </span>
+                  ))}
+                </h1>
+                <p className="hero-sub mt-4">{currentSlide.subtitle}</p>
+                <div className="mt-4 d-flex flex-wrap align-items-center gap-3">
+                  <Link to={currentSlide.href} className="btn btn-primary">{currentSlide.cta} <i className="bi bi-arrow-right ms-2"></i></Link>
+                  <Link to="/our-video" className="d-inline-flex align-items-center gap-2 text-decoration-none" style={{ color: "var(--ub-dark)", fontWeight: 600, fontSize: ".82rem", letterSpacing: ".1em", textTransform: "uppercase" }}>
+                    <span className="d-inline-flex align-items-center justify-content-center" style={{ width: 42, height: 42, borderRadius: "50%", background: "var(--ub-terracotta)", color: "#fff" }}><i className="bi bi-play-fill"></i></span>
+                    Watch Our Story
+                  </Link>
                 </div>
-              ))}
-              <div className="hero-dots">
-                {HERO_SLIDES.map((s, i) => (
-                  <button key={s.title} onClick={() => setSlide(i)} aria-label={`slide ${i + 1}`} className={`hero-dot ${i === slide ? "active" : ""}`} />
-                ))}
-                <button className="icon-btn ms-3" onClick={() => setSlide(s => (s - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}><i className="bi bi-chevron-left"></i></button>
-                <button className="icon-btn" onClick={() => setSlide(s => (s + 1) % HERO_SLIDES.length)}><i className="bi bi-chevron-right"></i></button>
+              </div>
+
+              <div className="d-flex align-items-center gap-4 mt-5">
+                <div className="stat-vertical">
+                  <div className="num">2012</div>
+                  <div className="lbl">Est.</div>
+                </div>
+                <div className="stat-vertical">
+                  <div className="num">300+</div>
+                  <div className="lbl">Products</div>
+                </div>
+                <div className="stat-vertical">
+                  <div className="num">50K+</div>
+                  <div className="lbl">Customers</div>
+                </div>
+                <div className="ms-auto d-none d-md-flex align-items-center gap-2">
+                  {HERO_SLIDES.map((s, i) => (
+                    <button key={s.title} onClick={() => setSlide(i)} aria-label={`slide ${i+1}`} style={{ width: i === slide ? 40 : 12, height: 3, background: i === slide ? "var(--ub-terracotta)" : "var(--ub-border)", border: 0, padding: 0, transition: "width .3s, background .3s" }} />
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-6">
-              <div className="position-relative">
-                {HERO_SLIDES.map((s, i) => (
-                  <div key={s.title} style={{ display: i === slide ? "block" : "none" }} className="animate-fadeIn">
-                    <div className="hero-image-wrap">
-                      <img src={s.image} alt={s.title} />
-                      <div className="tint" style={{ background: `linear-gradient(160deg, transparent 40%, ${s.accent}40 100%)` }}></div>
-                    </div>
-                    <div className="floating-chip" style={{ bottom: -20, left: -20 }}>
-                      <span className="rounded-circle d-flex align-items-center justify-content-center" style={{ width: 48, height: 48, background: "var(--ub-cream-2)" }}>
-                        <i className="bi bi-award-fill" style={{ fontSize: 22, color: "var(--ub-gold)" }}></i>
-                      </span>
-                      <div>
-                        <div className="small text-muted-2" style={{ fontSize: 12 }}>Certified</div>
-                        <div className="font-serif h5 mb-0">100% Organic</div>
-                      </div>
-                    </div>
-                    <div className="floating-chip top-right" style={{ animationDelay: ".6s" }}>
-                      <div>
-                        <div style={{ fontSize: 10, letterSpacing: ".25em", textTransform: "uppercase", opacity: .85 }}>Since</div>
-                        <div className="font-serif" style={{ fontSize: "1.8rem", lineHeight: 1 }}>2012</div>
-                      </div>
+            <div className="col-lg-5">
+              <div className="hero-visual">
+                <div className="disc">
+                  <div className="disc-bg" />
+                  <div className="disc-inner">
+                    <img src={currentSlide.image} alt={currentSlide.title} />
+                  </div>
+                  <svg className="ring-text ring-svg" viewBox="0 0 500 500">
+                    <defs><path id="circle" d="M 250,250 m -220,0 a 220,220 0 1,1 440,0 a 220,220 0 1,1 -440,0" /></defs>
+                    <text><textPath href="#circle">UB MART · FROM FARM TO PLATE · ORGANIC · SINCE 2012 · </textPath></text>
+                  </svg>
+                  <div className="chip bl">
+                    <span style={{ width: 42, height: 42, borderRadius: "50%", background: "var(--ub-cream-2)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><i className="bi bi-award" style={{ color: "var(--ub-terracotta)", fontSize: 22 }}></i></span>
+                    <div>
+                      <div style={{ fontSize: 10, letterSpacing: ".25em", textTransform: "uppercase", color: "var(--ub-muted)" }}>Certified</div>
+                      <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.1rem" }}>100% Organic</div>
                     </div>
                   </div>
-                ))}
+                  <div className="chip tr">
+                    <div>
+                      <div style={{ fontSize: 10, letterSpacing: ".25em", textTransform: "uppercase", opacity: .85 }}>Rating</div>
+                      <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.4rem" }}>4.9 <i className="bi bi-star-fill" style={{ color: "var(--ub-gold)", fontSize: ".9rem" }}></i></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Marquee band */}
+      <section className="marquee-band">
+        <div className="track">
+          {[0, 1].map(k => (
+            <span key={k}>
+              Organic <span className="em">Living</span> <span className="dot" /> Plant <span className="em">Based</span> <span className="dot" /> Farm <span className="em">Fresh</span> <span className="dot" /> Herbal <span className="em">Wisdom</span> <span className="dot" /> Pure <span className="em">Goodness</span> <span className="dot" />
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Feature strip */}
-      <section className="bg-white border-top border-bottom" style={{ borderColor: "var(--ub-border)" }}>
-        <div className="container-xxl px-4 px-lg-5 py-4 mx-auto">
-          <div className="row g-4">
-            {FEATURES.map(f => (
-              <div key={f.title} className="col-6 col-lg-3">
-                <div className="feat-item d-flex align-items-center gap-3">
-                  <div className="feat-icon"><i className={`bi bi-${iconMap[f.icon]}`}></i></div>
-                  <div>
-                    <div className="font-serif h6 mb-0">{f.title}</div>
-                    <div className="text-muted-2" style={{ fontSize: 12 }}>{f.subtitle}</div>
-                  </div>
+      <section className="feature-strip">
+        <div className="container container-editorial px-3 px-lg-4">
+          <div className="row">
+            {FEATURES.map((f, idx) => (
+              <div key={f.title} className={`col-6 col-lg-3 feat-item ${idx > 0 ? "border-start" : ""}`} style={{ borderColor: "var(--ub-border) !important", paddingLeft: idx > 0 ? "1.75rem" : 0 }}>
+                <div className="feat-icon"><i className={`bi bi-${iconMap[f.icon]}`}></i></div>
+                <div>
+                  <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.1rem" }}>{f.title}</div>
+                  <div className="text-muted-2" style={{ fontSize: 12 }}>{f.subtitle}</div>
                 </div>
               </div>
             ))}
@@ -129,40 +136,67 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
-        <div className="text-center mx-auto mb-5" style={{ maxWidth: 640 }}>
-          <span className="eyebrow"><i className="bi bi-stars"></i> Shop by Category</span>
-          <h2 className="section-title mt-3" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Nature's Finest, <span className="italic">Curated for You</span></h2>
-          <p className="text-muted-2 mt-3">From plant-based meats to ancient herbs — five carefully crafted collections that redefine what organic can be.</p>
+      {/* Story block */}
+      <section className="story-block">
+        <div className="container container-editorial px-3 px-lg-4 py-5 py-lg-6">
+          <div className="text-center mx-auto mb-5" style={{ maxWidth: 800 }}>
+            <span className="divider-serif">Our Philosophy</span>
+          </div>
+          <div className="row g-5 align-items-center">
+            <div className="col-lg-6">
+              <div className="story-imgs position-relative">
+                <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=900" alt="market" className="w-100" style={{ height: 460, objectFit: "cover" }} />
+                <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=400" alt="farm" className="position-absolute d-none d-md-block" style={{ width: 210, height: 260, objectFit: "cover", bottom: -40, right: -30, border: "8px solid var(--ub-cream)" }} />
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <span className="eyebrow">Est. 2012</span>
+              <h2 className="section-title mt-3" style={{ fontSize: "clamp(2.2rem, 4.2vw, 3.6rem)" }}>Trying to create a new <span className="em">Organic Mart</span> experience</h2>
+              <div className="story-quote mt-4">Everyone has the right to safe food that is grown with lots of love and care.</div>
+              <p className="mt-4 text-muted-2">At UB Mart, we are more than a convenience store, pharmacy, and cafe. We combine the best of all worlds under one roof — providing convenience, health, and a welcoming atmosphere for our valued customers.</p>
+              <Link to="/about" className="btn btn-outline-primary mt-3">Discover Our Journey <i className="bi bi-arrow-right ms-2"></i></Link>
+            </div>
+          </div>
         </div>
-        <div className="row g-4">
+      </section>
+
+      {/* Categories editorial */}
+      <section className="container container-editorial px-3 px-lg-4 py-5 py-lg-6">
+        <div className="row align-items-end mb-5">
+          <div className="col-md-7">
+            <span className="eyebrow">Explore</span>
+            <h2 className="section-title mt-3" style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)" }}>Our five <span className="em">collections</span></h2>
+          </div>
+          <div className="col-md-5 text-md-end">
+            <Link to="/products" className="btn btn-outline-primary">View all <i className="bi bi-arrow-right ms-2"></i></Link>
+          </div>
+        </div>
+        <div className="row g-5">
           {CATEGORIES.map((c, i) => (
-            <div key={c.slug} className={i === 0 ? "col-lg-8" : "col-6 col-lg-4"}>
-              <Link to={`/products/${c.slug}`} className={`category-card ${i === 0 ? "big" : ""}`}>
-                <img src={c.image} alt={c.name} />
-                <div className="overlay" style={{ background: `linear-gradient(180deg, transparent 30%, ${c.color}e0 100%)` }}></div>
-                <div className="content">
-                  <div className="eye">{c.tagline}</div>
-                  <h3>{c.name}</h3>
-                  {i === 0 && <p className="mt-2 opacity-90" style={{ maxWidth: 420 }}>{c.description}</p>}
-                  <span className="go">Shop Now <i className="bi bi-arrow-right"></i></span>
-                </div>
+            <div key={c.slug} className="col-md-6 col-lg-4">
+              <Link to={`/products/${c.slug}`} className="cat-editorial">
+                <div className="num">0{i+1}</div>
+                <div className="img-wrap"><img src={c.image} alt={c.name} /></div>
+                <h3>{c.name}</h3>
+                <div className="tagline">{c.tagline}</div>
+                <span className="arrow">Shop Now <i className="bi bi-arrow-right"></i></span>
               </Link>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Featured products */}
+      {/* Best sellers */}
       <section className="bg-cream">
-        <div className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
-          <div className="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
-            <div>
-              <span className="eyebrow"><i className="bi bi-flower1"></i> Best Sellers</span>
-              <h2 className="section-title mt-2" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Handpicked <span className="italic">Favourites</span></h2>
+        <div className="container container-editorial px-3 px-lg-4 py-5 py-lg-6">
+          <div className="row align-items-end mb-5">
+            <div className="col-md-7">
+              <span className="eyebrow"><i className="bi bi-flower1"></i> Curated Selection</span>
+              <h2 className="section-title mt-3" style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)" }}>Handpicked <span className="em">favourites</span></h2>
             </div>
-            <Link to="/products" className="btn btn-outline-primary">View All <i className="bi bi-arrow-right ms-1"></i></Link>
+            <div className="col-md-5 text-md-end">
+              <Link to="/products" className="btn btn-outline-primary">Shop all <i className="bi bi-arrow-right ms-2"></i></Link>
+            </div>
           </div>
           <div className="row g-4">
             {featured.map(p => <div key={p.id} className="col-6 col-md-4 col-lg-3"><ProductCard p={p} /></div>)}
@@ -170,112 +204,111 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Story */}
-      <section className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
-        <div className="row g-5 align-items-center">
-          <div className="col-lg-6">
-            <div className="img-reveal position-relative">
-              <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1000" alt="farm" className="w-100" style={{ height: 520, objectFit: "cover", display: "block" }} />
-              <div className="position-absolute bg-white bg-opacity-95 rounded-4 px-4 py-3" style={{ top: 20, left: 20 }}>
-                <div className="eyebrow" style={{ letterSpacing: ".25em" }}>Organic since</div>
-                <div className="font-serif" style={{ fontSize: "2.5rem", color: "var(--ub-green)", lineHeight: 1 }}>2012</div>
-              </div>
+      {/* Testimonials single */}
+      <section className="bg-dark-organic py-5 py-lg-6">
+        <div className="grain" />
+        <div className="blob-blur" style={{ width: 400, height: 400, background: "rgba(180,95,62,.25)", top: -80, left: -80 }} />
+        <div className="blob-blur" style={{ width: 460, height: 460, background: "rgba(74,124,42,.2)", bottom: -120, right: -100 }} />
+        <div className="container container-editorial px-3 px-lg-4 position-relative">
+          <div className="text-center mx-auto" style={{ maxWidth: 820 }}>
+            <span className="eyebrow light">Kind Words</span>
+            <h2 className="section-title on-dark mt-3" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Loved by <span className="em">50,000+</span> families</h2>
+            <div className="testi-single mt-5 animate-fadeIn" key={currentTesti.name}>
+              <img className="avatar" src={currentTesti.avatar} alt={currentTesti.name} />
+              <blockquote>{currentTesti.text}</blockquote>
+              <div className="name text-white">{currentTesti.name}</div>
+              <div className="role">{currentTesti.role}</div>
             </div>
-          </div>
-          <div className="col-lg-6">
-            <span className="eyebrow"><i className="bi bi-stars"></i> Our Story</span>
-            <h2 className="section-title mt-3" style={{ fontSize: "clamp(2rem,4vw,3rem)", lineHeight: 1.15 }}>Trying to create a new <span className="italic">Organic Mart</span> experience since 2012</h2>
-            <p className="mt-4" style={{ color: "var(--ub-text)" }}>At UB Mart, we are more than a convenience store, pharmacy, and cafe. We combine the best of all worlds under one roof — providing convenience, health, and a welcoming atmosphere for our customers.</p>
-            <p className="mt-2" style={{ color: "var(--ub-text)" }}>From certified organic groceries to plant-based meats, our team of experts sources the very best of nature and delivers it straight to your door.</p>
-            <div className="row g-3 mt-2">
-              {STATS.map(s => (
-                <div key={s.label} className="col-6 col-sm-3">
-                  <div className="bg-cream rounded-4 p-3">
-                    <div className="font-serif" style={{ fontSize: "1.9rem", color: "var(--ub-green)", lineHeight: 1 }}>{s.value}</div>
-                    <div className="text-muted-2" style={{ fontSize: 12 }}>{s.label}</div>
-                  </div>
-                </div>
+            <div className="testi-dots">
+              {TESTIMONIALS.map((t, i) => (
+                <button key={t.name} className={`testi-dot ${i === testi ? "active" : ""}`} onClick={() => setTesti(i)} aria-label={`testimonial ${i+1}`} />
               ))}
             </div>
-            <Link to="/about" className="btn btn-primary mt-4">Discover Our Journey <i className="bi bi-arrow-right ms-1"></i></Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-dark-organic py-5 py-lg-6">
-        <div className="grain-overlay" />
-        <div className="blob" style={{ width: 380, height: 380, background: "rgba(74,124,42,.25)", top: -80, right: -80 }} />
-        <div className="container-xxl px-4 px-lg-5 position-relative mx-auto">
-          <div className="text-center mx-auto mb-5" style={{ maxWidth: 600 }}>
-            <span className="eyebrow" style={{ color: "var(--ub-green-light)" }}><i className="bi bi-quote"></i> Testimonials</span>
-            <h2 className="section-title mt-3 text-white" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Loved by <span className="italic" style={{ color: "var(--ub-green-light)" }}>50,000+</span> families</h2>
+      {/* Big stats */}
+      <section className="container container-editorial px-3 px-lg-4 py-5 py-lg-6">
+        <div className="row g-4">
+          {STATS.map((s, i) => (
+            <div key={s.label} className={`col-6 col-md-3 ${i > 0 ? "border-start" : ""}`} style={{ borderColor: "var(--ub-border) !important" }}>
+              <div className="big-stat">
+                <div className="num">{s.value}</div>
+                <div className="lbl">{s.label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Franchise band */}
+      <section className="franchise-band">
+        <div className="bg-word">Grow</div>
+        <div className="row g-0 align-items-stretch position-relative">
+          <div className="col-md-6" style={{ minHeight: 420 }}>
+            <img src="https://images.pexels.com/photos/29039800/pexels-photo-29039800.jpeg?w=1000" alt="farm" className="figure-img" style={{ display: "block", height: "100%", minHeight: 420 }} />
           </div>
-          <div className="row g-4">
-            {TESTIMONIALS.map(t => (
-              <div key={t.name} className="col-md-6 col-lg-3">
-                <div className="h-100 rounded-4xl p-4" style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)", backdropFilter: "blur(6px)" }}>
-                  <i className="bi bi-quote" style={{ fontSize: 32, color: "var(--ub-green-light)" }}></i>
-                  <p className="small mt-2" style={{ color: "rgba(255,255,255,.9)", lineHeight: 1.65 }}>&ldquo;{t.text}&rdquo;</p>
-                  <div className="d-flex align-items-center gap-3 mt-4">
-                    <img src={t.avatar} alt={t.name} width={44} height={44} className="rounded-circle" style={{ objectFit: "cover" }} />
-                    <div>
-                      <div className="fw-medium small text-white">{t.name}</div>
-                      <div style={{ fontSize: 11, color: "rgba(255,255,255,.6)" }}>{t.role}</div>
-                    </div>
-                  </div>
-                </div>
+          <div className="col-md-6 p-4 p-lg-6 d-flex align-items-center position-relative">
+            <div>
+              <span className="eyebrow light"><i className="bi bi-award"></i> Franchise Opportunity</span>
+              <h2 className="section-title on-dark mt-3" style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)", color: "#fff" }}>Grow with us. <span className="em" style={{ color: "var(--ub-cream)" }}>Own an organic empire.</span></h2>
+              <p className="mt-3" style={{ color: "rgba(255,255,255,.85)", maxWidth: 500 }}>Partner with UB Mart and be part of India's largest organic movement. Established brand, proven model, dedicated support.</p>
+              <Link to="/franchise" className="btn bg-white mt-3" style={{ color: "var(--ub-terracotta)", padding: ".8rem 1.8rem", fontWeight: 600, letterSpacing: ".05em", textTransform: "uppercase", fontSize: ".78rem", borderRadius: 0 }}>Explore Franchise <i className="bi bi-arrow-right ms-2"></i></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery + Watch */}
+      <section className="container container-editorial px-3 px-lg-4 py-5 py-lg-6">
+        <div className="row g-5 align-items-center">
+          <div className="col-lg-6">
+            <span className="eyebrow">Watch Our Story</span>
+            <h2 className="section-title mt-3" style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}>From <span className="em">farm</span> to your family</h2>
+            <p className="mt-3 text-muted-2">Meet the farmers, walk our fields, and see how every product on your shelf begins with love, respect for the land, and a promise of purity.</p>
+            <div className="mt-4 d-flex align-items-center gap-3">
+              <Link to="/our-video" className="cta-circle"><i className="bi bi-play-fill"></i></Link>
+              <div>
+                <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.2rem" }}>Play the story</div>
+                <div className="text-muted-2 small">6 short films • 3 minutes each</div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <Link to="/our-video" className="video-tile">
+              <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1200" alt="video" />
+              <div className="grad" />
+              <div className="cap">
+                <div className="eye">Featured</div>
+                <h3>What is Organic Food?</h3>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Instagram-style gallery */}
+        <div className="mt-5 pt-5 border-top" style={{ borderColor: "var(--ub-border)" }}>
+          <div className="text-center mb-4">
+            <span className="eyebrow">Follow us @ubmart</span>
+            <h3 className="section-title mt-2" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>Straight from the <span className="em">gram</span></h3>
+          </div>
+          <div className="row g-2">
+            {[
+              "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400",
+              "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400",
+              "https://images.unsplash.com/photo-1534432182912-63863115e106?w=400",
+              "https://images.unsplash.com/photo-1514733670139-4d87a1941d55?w=400",
+              "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400",
+              "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400"
+            ].map((src) => (
+              <div key={src} className="col-4 col-md-2">
+                <a href="#" className="gallery-item">
+                  <img src={src} alt="" />
+                  <span className="ig-icon"><i className="bi bi-instagram"></i></span>
+                </a>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Franchise CTA */}
-      <section className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
-        <div className="position-relative rounded-5xl p-4 p-md-5 text-white" style={{ background: "linear-gradient(135deg, var(--ub-green), var(--ub-green-mid))", overflow: "hidden" }}>
-          <div className="grain-overlay" />
-          <div className="blob" style={{ width: 400, height: 400, background: "rgba(255,255,255,.1)", bottom: -100, right: -100 }} />
-          <div className="row g-4 align-items-center position-relative">
-            <div className="col-md-6">
-              <span className="eyebrow text-white" style={{ opacity: .9 }}><i className="bi bi-award"></i> Franchise Opportunity</span>
-              <h2 className="section-title text-white mt-3" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>Grow with us. <span className="italic" style={{ color: "var(--ub-green-light)" }}>Own an organic empire.</span></h2>
-              <p className="mt-3" style={{ color: "rgba(255,255,255,.9)", maxWidth: 500 }}>Partner with UB Mart and be part of India's largest organic movement. Established brand, proven model, dedicated support.</p>
-              <Link to="/franchise" className="btn bg-white mt-3 rounded-pill fw-semibold" style={{ color: "var(--ub-green)", padding: ".75rem 1.75rem" }}>Explore Franchise <i className="bi bi-arrow-right ms-1"></i></Link>
-            </div>
-            <div className="col-md-6">
-              <div className="row g-3">
-                {[["300+", "Products"], ["13", "States"], ["50K+", "Customers"], ["12+", "Years"]].map(([v, l]) => (
-                  <div key={l} className="col-6">
-                    <div className="rounded-4xl p-4" style={{ background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)" }}>
-                      <div className="font-serif" style={{ fontSize: "2.3rem", lineHeight: 1 }}>{v}</div>
-                      <div className="small" style={{ color: "rgba(255,255,255,.85)" }}>{l}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Video CTA */}
-      <section className="bg-cream">
-        <div className="container-xxl px-4 px-lg-5 py-5 py-lg-6 mx-auto">
-          <div className="row g-5 align-items-center">
-            <div className="col-lg-7">
-              <Link to="/our-video" className="video-tile d-block">
-                <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=1200" alt="video" />
-                <div className="grad"></div>
-                <div className="play"><span><i className="bi bi-play-fill"></i></span></div>
-              </Link>
-            </div>
-            <div className="col-lg-5">
-              <span className="eyebrow">Watch Our Story</span>
-              <h2 className="section-title mt-2" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>From <span className="italic">farm</span> to your family</h2>
-              <p className="mt-3 text-muted-2">Meet the farmers, walk our fields, and see how every product on your shelf begins with love, respect for the land, and a promise of purity.</p>
-              <Link to="/our-video" className="btn btn-primary mt-2">Watch Videos <i className="bi bi-arrow-right ms-1"></i></Link>
-            </div>
           </div>
         </div>
       </section>
